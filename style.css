@@ -1,0 +1,17 @@
+/* Basic layout for the voting page */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.vote-container {
+    margin-top: 50px;
+}
+
+.vote-button {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
