@@ -1,17 +1,43 @@
-/* Basic layout for the voting page */
+/* Basic styling */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f4f4f4;
 }
 
+/* Voting container */
 .vote-container {
     margin-top: 50px;
+    position: relative;
 }
 
+/* Vote buttons */
 .vote-button {
     font-size: 20px;
     padding: 10px 20px;
     margin: 10px;
     cursor: pointer;
+    border: 2px solid black;
+    background-color: white;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+/* Useless loading bar (hidden by default) */
+.democracy-bar {
+    width: 50%;
+    height: 20px;
+    margin: 20px auto;
+    border: 2px solid black;
+    background-color: lightgray;
+    overflow: hidden;
+    position: relative;
+    display: none; /* Hidden initially */
+}
+
+/* Actual progress indicator */
+.bar-progress {
+    width: 0%;
+    height: 100%;
+    background-color: blue;
+    transition: width 3s ease-in-out;
 }
