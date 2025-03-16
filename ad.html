@@ -3,45 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Downloading Your Info...</title>
+    <title>⚠️ Security Alert ⚠️</title>
     <link rel="stylesheet" href="style.css">
+    <script src="ad.js" defer></script>
+
 </head>
 <body>
-    <header>
-        <h1>⚠️ WARNING: SECURITY RISK DETECTED ⚠️</h1>
-    </header>
-
-    <div class="container">
-        <h2>Your data is being processed...</h2>
-        <p>🚨 Tracking location...<br>🚨 Extracting bank details...<br>🚨 Uploading to dark web...</p>
-
-        <div class="loading-bar">
-            <div class="loading-progress"></div>
+    <div class="data-warning">
+        <h1>⚠️ SECURITY ALERT ⚠️</h1>
+        <p><strong>Your personal data is being downloaded...</strong></p>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
 
-        <p id="fake-progress-text">Processing: 0%</p>
+        <p class="file-info">📂 Transferring: <span id="fileName">sensitive_data.zip</span></p>
+        <p class="progress-text">Progress: <span id="progressPercent">0%</span></p>
+        
+        <ul class="data-list">
+            <li>🔍 Scanning your personal files...</li>
+            <li>📡 Connecting to external servers...</li>
+            <li>🛑 Disabling antivirus software...</li>
+            <li>💳 Extracting saved passwords...</li>
+            <li>📞 Uploading contacts to dark web...</li>
+            <li>💾 Copying financial records...</li>
+        </ul>
 
-        <button onclick="window.location.href='index.html'">⬅ Return to Safety</button>
+        <button id="cancelButton">❌ Stop Transfer</button>
     </div>
-
-    <script>
-        let progress = 0;
-        const progressText = document.getElementById("fake-progress-text");
-        const progressBar = document.querySelector(".loading-progress");
-
-        function fakeProgress() {
-            if (progress < 100) {
-                progress += Math.floor(Math.random() * 10) + 5;
-                if (progress > 100) progress = 100;
-                progressText.innerText = `Processing: ${progress}%`;
-                progressBar.style.width = `${progress}%`;
-                setTimeout(fakeProgress, 500);
-            } else {
-                progressText.innerText = "✅ Data fully extracted!";
-            }
-        }
-
-        fakeProgress();
-    </script>
 </body>
 </html>
