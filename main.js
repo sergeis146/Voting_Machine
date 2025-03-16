@@ -1,80 +1,71 @@
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll(".vote-button");
-    const captchaButton = document.getElementById("captchaButton");
+    const captchaCodeElement = document.getElementById("captchaCode");
+    const captchaInput = document.getElementById("captchaInput");
+    const captchaVerify = document.getElementById("captchaVerify");
     const captchaStatus = document.getElementById("captchaStatus");
-    const captchaAlert = document.getElementById("captchaAlert");
-    const resultsButton = document.getElementById("resultsButton");
-    const premiumButton = document.getElementById("premiumButton");
+    const voteStatus = document.getElementById("voteStatus");
+    const resultsButton = document.getElementById("results-btn");
+
+    let captchaCode = generateCaptcha();
     let captchaVerified = false;
+    let buttonMoved = {}; // Track if a button has moved
 
-    // Check if user has already voted
-    let userVoted = localStorage.getItem("userVoted") === "true";
-    let isPremium = localStorage.getItem("isPremium") === "true";
-
-    // If user has voted & is not premium, disable voting
-    if (userVoted && !isPremium) {
-        buttons.forEach(button => button.disabled = true);
-        document.getElementById("voteStatus").innerText = "❌ You have already voted!";
+    // Generate a random CAPTCHA
+    function generateCaptcha() {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let code = "";
+        for (let i = 0; i < 6; i++) {
+            code += chars[Math.floor(Math.random() * chars.length)];
+        }
+        captchaCodeElement.innerText = code;
+        return code;
     }
 
-    // Voting process
+    // CAPTCHA Verification
+    captchaVerify.addEventListener("click", () => {
+        if (captchaInput.value.toUpperCase() === captchaCode) {
+            captchaVerified = true;
+            captchaStatus.innerText = "✅ Verified!";
+            captchaStatus.style.color = "green";
+        } else {
+            captchaStatus.innerText = "❌ Incorrect CAPTCHA. Try again.";
+            captchaStatus.style.color = "red";
+            captchaCode = generateCaptcha(); // Regenerate CAPTCHA
+            captchaInput.value = ""; // Clear input field
+        }
+    });
+
+    // Move Vote Button Slightly (x=60, y=30), Only Once Per Button
     buttons.forEach(button => {
+        buttonMoved[button.dataset.option] = false;
+
+        button.addEventListener("mouseover", () => {
+            if (!buttonMoved[button.dataset.option]) {
+                button.style.transform = "translateX(60px) translateY(30px)";
+                buttonMoved[button.dataset.option] = true; // Prevent further movement
+            }
+        });
+
         button.addEventListener("click", () => {
             if (!captchaVerified) {
-                captchaAlert.classList.remove("hidden");
-                captchaAlert.style.color = "red";
-                captchaAlert.innerText = "⚠️ You must complete CAPTCHA first!";
+                voteStatus.innerText = "❌ You must complete CAPTCHA before voting!";
+                voteStatus.style.color = "red";
                 return;
             }
-
-            if (userVoted && !isPremium) {
-                alert("❌ You have already voted! Get Premium to vote again.");
-                return;
-            }
-
-            captchaAlert.classList.add("hidden");
 
             let vote = button.dataset.option;
             let votes = JSON.parse(localStorage.getItem("votes")) || [];
             votes.push(vote);
             localStorage.setItem("votes", JSON.stringify(votes));
 
-            document.getElementById("lastVote").innerText = `Last vote: ${vote}`;
-            resultsButton.classList.remove("hidden");
+            voteStatus.innerText = "✅ Vote successfully counted!";
+            voteStatus.style.color = "green";
 
-            // Mark user as voted
-            localStorage.setItem("userVoted", "true");
-            userVoted = true;
-
-            // Play vote sound
-            let voteSound = new Audio("sounds/vote_sound.mp3");
-            voteSound.play().catch(() => console.log("Sound file missing or blocked."));
-
-            // Disable voting after submission
-            if (!isPremium) {
-                buttons.forEach(button => button.disabled = true);
-                document.getElementById("voteStatus").innerText = "❌ You have already voted!";
-            }
+            resultsButton.classList.remove("hidden"); // Show Results button
+            setTimeout(() => {
+                window.location.href = "results.html";
+            }, 2000);
         });
-    });
-
-    // CAPTCHA Handling
-    captchaButton.addEventListener("click", () => {
-        captchaVerified = true;
-        captchaStatus.innerText = "✅ Verified!";
-        captchaButton.innerText = "[✔]";
-        captchaButton.style.background = "#28a745";
-        captchaAlert.classList.add("hidden"); // Hide warning after verifying
-    });
-
-    // Premium Button (Removes Vote Limit)
-    premiumButton.addEventListener("click", () => {
-        setTimeout(() => {
-            alert("✅ Premium Democracy Activated! You can now vote unlimited times.");
-            localStorage.setItem("isPremium", "true");
-            isPremium = true;
-            buttons.forEach(button => button.disabled = false);
-            document.getElementById("voteStatus").innerText = "✅ Unlimited Voting Enabled!";
-        }, 3000);
     });
 });
