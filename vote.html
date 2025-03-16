@@ -3,24 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vote Now</title>
+    <title>Official Government Voting System</title>
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer></script>
 </head>
 <body>
-    <div class="vote-container">
-        <h1>Vote for Your Favorite Option</h1>
+    <header>
+        <h1>⚖️ Official Government Voting Portal</h1>
+        <p>Ensuring Democracy™ Since 2024</p>
+    </header>
 
-        <div class="democracy-bar">
-            <div class="bar-progress"></div>
+    <div class="vote-container">
+        <h2>Vote for the Next Supreme Leader</h2>
+
+        <p id="voteStatus">Waiting for your vote...</p>
+
+        <!-- Candidates With Images & Info Buttons -->
+        <div class="candidate-grid">
+            <div class="candidate">
+                <img src="images/shrek.png" alt="Shrek">
+                <p>🟢 Shrek (The People's Ogre)</p>
+                <button class="vote-button" data-option="Shrek">Vote</button>
+                <button class="info-button" onclick="alert('Shrek fights for swamp rights and fairytale creatures.')">ℹ</button>
+            </div>
+
+            <div class="candidate">
+                <img src="images/chungo.png" alt="Big Chungus">
+                <p>🐰 Big Chungus (Economic Genius)</p>
+                <button class="vote-button" data-option="Big Chungus">Vote</button>
+                <button class="info-button" onclick="alert('Big Chungus is a master of economy and memes.')">ℹ</button>
+            </div>
+
+            <div class="candidate">
+                <img src="images/giga.png" alt="Giga Chad">
+                <p>💪 Giga Chad (Alpha Leadership)</p>
+                <button class="vote-button" data-option="Giga Chad">Vote</button>
+                <button class="info-button" onclick="alert('Giga Chad will lead with confidence and jawlines.')">ℹ</button>
+            </div>
+
+            <div class="candidate">
+                <img src="images/mrkrabs.png" alt="Mr. Krabs">
+                <p>🦀 Mr. Krabs (Fiscal Conservative)</p>
+                <button class="vote-button" data-option="Mr. Krabs">Vote</button>
+                <button class="info-button" onclick="alert('Mr. Krabs promises strong financial policies.')">ℹ</button>
+            </div>
         </div>
 
-        <button class="vote-button" data-option="A">Vote for A</button>
-        <button class="vote-button" data-option="B">Vote for B</button>
-        <button class="vote-button" data-option="C">Vote for C</button>
-        <button class="vote-button" data-option="D">Vote for D</button>
-
         <p id="lastVote">Last vote: <span>None</span></p>
+
+        <!-- Results Button -->
+        <button id="resultsButton" class="results-btn hidden" onclick="window.location.href='results.html'">
+            📊 View Public Results
+        </button>
+
+        <!-- CAPTCHA Section -->
+        <div id="captchaSection">
+            <h2>🔒 Security Check</h2>
+            <p id="captchaAlert" class="hidden">⚠️ You must complete this to vote!</p>
+            <p>Click the box below to verify you're human:</p>
+            <button id="captchaButton">[ ]</button>
+            <p id="captchaStatus">Not Verified</p>
+        </div>
+
+        <!-- Premium Democracy -->
+        <div id="premiumDemocracy">
+            <h2>💰 Upgrade to Premium Democracy™</h2>
+            <p>For just <strong>$9.99</strong>, you can vote TWICE!</p>
+            <button id="premiumButton">Upgrade Now</button>
+            <p id="paymentProcessing" class="hidden">Processing payment...</p>
+            <p id="premiumStatus">Standard Voting Mode.</p>
+        </div>
     </div>
 </body>
 </html>
