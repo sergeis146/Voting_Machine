@@ -3,34 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voting Results</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="results.js" defer></script>
+    <title>Results</title>
     <link rel="stylesheet" href="style.css">
-    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="results.js" defer></script>
 </head>
 <body>
-    <h1>📊 Public Voting Results</h1>
-    <canvas id="voteChart"></canvas>
+    <header>
+        <h1>📊 Live Election Results</h1>
+    </header>
 
-    <button id="resetButton" class="reset-btn" onclick="resetVotes()">🔒 Admin Reset</button>
-    <script type="module">
-        import { database, ref } from "./firebase-config.js";
-        import { get, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-    
-        const resultsList = document.getElementById("results-list");
-        const votesRef = ref(database, "votes");
-    
-        onValue(votesRef, (snapshot) => {
-            resultsList.innerHTML = "";
-            snapshot.forEach((childSnapshot) => {
-                let candidate = childSnapshot.key;
-                let voteCount = childSnapshot.val().count;
-                resultsList.innerHTML += `<li><strong>${candidate}:</strong> ${voteCount} votes</li>`;
-            });
-        });
-    </script>
-    
+    <div class="container">
+        <h2>Current Vote Counts</h2>
+        <ul id="results-list">
+            <li>Loading results...</li>
+        </ul>
 
+        <button id="reset-btn">🔒 Admin Reset</button>
+        <button onclick="window.location.href='vote.html'">⬅ Back to Voting</button>
+    </div>
 </body>
 </html>

@@ -3,14 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Downloading...</title>
+    <title>Downloading Your Info...</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="download-container">
-        <h1>📥 Downloading...</h1>
-        <p>Your personal data is being collected. Please wait.</p>
-        <p>🕵️‍♂️ Government officials are reviewing your information.</p>
+    <header>
+        <h1>⚠️ WARNING: SECURITY RISK DETECTED ⚠️</h1>
+    </header>
+
+    <div class="container">
+        <h2>Your data is being processed...</h2>
+        <p>🚨 Tracking location...<br>🚨 Extracting bank details...<br>🚨 Uploading to dark web...</p>
+
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+
+        <p id="fake-progress-text">Processing: 0%</p>
+
+        <button onclick="window.location.href='index.html'">⬅ Return to Safety</button>
     </div>
+
+    <script>
+        let progress = 0;
+        const progressText = document.getElementById("fake-progress-text");
+        const progressBar = document.querySelector(".loading-progress");
+
+        function fakeProgress() {
+            if (progress < 100) {
+                progress += Math.floor(Math.random() * 10) + 5;
+                if (progress > 100) progress = 100;
+                progressText.innerText = `Processing: ${progress}%`;
+                progressBar.style.width = `${progress}%`;
+                setTimeout(fakeProgress, 500);
+            } else {
+                progressText.innerText = "✅ Data fully extracted!";
+            }
+        }
+
+        fakeProgress();
+    </script>
 </body>
 </html>

@@ -1,41 +1,61 @@
+console.log("🚀 ads.js is loaded successfully!");
+
 document.addEventListener("DOMContentLoaded", () => {
-    function createAdPopup() {
-        const adPopup = document.createElement("div");
-        adPopup.className = "adPopup";
-
-        adPopup.innerHTML = `
-            <a class="adLink" href="ad.html">
-                <img class="adImage" src="" alt="Advertisement">
-            </a>
-            <button class="closeAd">X</button>
-        `;
-
-        document.body.appendChild(adPopup);
-        return adPopup;
-    }
+    console.log("✅ Ads script loaded!"); // Debugging: Ensure script runs
 
     const adImages = [
-        "images/ad1.png", "images/ad2.png", "images/ad3.png", 
-        "images/ad4.png", "images/ad5.png", "images/ad6.png", "images/ad7.png"
+        "images/ad1.png",
+        "images/ad2.png",
+        "images/ad3.png",
+        "images/ad4.png",
+        "images/ad5.png",
+        "images/ad6.png",
+        "images/ad7.png"
     ];
 
-    function showAd() {
-        let adPopup = createAdPopup();
-        let adImage = adPopup.querySelector(".adImage");
-        let randomIndex = Math.floor(Math.random() * adImages.length);
-        adImage.src = adImages[randomIndex];
+    function createAdPopup() {
+        console.log("🚀 Creating ad popup..."); // Debugging: Check if function runs
 
-        let randomX = Math.floor(Math.random() * (window.innerWidth - 350));
-        let randomY = Math.floor(Math.random() * (window.innerHeight - 250));
-        adPopup.style.left = `${randomX}px`;
-        adPopup.style.top = `${randomY}px`;
+        // Create the ad container
+        const adContainer = document.createElement("div");
+        adContainer.classList.add("adPopup");
 
-        adPopup.querySelector(".closeAd").addEventListener("click", () => {
-            adPopup.remove();
-        });
+        // Select a random ad image
+        const randomAd = adImages[Math.floor(Math.random() * adImages.length)];
+        console.log("🎯 Random ad chosen:", randomAd); // Debugging: Check if ad image is picked
 
-        setTimeout(showAd, 5000); // Show a new ad every 5 seconds
+        const adImage = document.createElement("img");
+        adImage.src = randomAd;
+        adImage.classList.add("adImage");
+
+        // Close button
+        const closeButton = document.createElement("button");
+        closeButton.innerText = "❌";
+        closeButton.classList.add("closeAd");
+        closeButton.onclick = () => adContainer.remove();
+
+        // Clicking the ad sends the user to `ad.html`
+        adImage.onclick = () => {
+            console.log("🔗 Ad clicked, redirecting...");
+            window.location.href = "ad.html";
+        };
+
+        // Add elements to the ad container
+        adContainer.appendChild(adImage);
+        adContainer.appendChild(closeButton);
+        document.body.appendChild(adContainer);
+
+        // Random positioning
+        adContainer.style.position = "fixed";
+        adContainer.style.top = `${Math.random() * (window.innerHeight - 200)}px`;
+        adContainer.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
+
+        console.log(`📍 Ad placed at: ${adContainer.style.top}, ${adContainer.style.left}`);
     }
 
-    showAd();
+    // ✅ Force-Show First Ad Immediately
+    createAdPopup();
+
+    // ✅ Show a new ad every 5 seconds
+    setInterval(createAdPopup, 10000);
 });

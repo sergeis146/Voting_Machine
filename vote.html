@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote Now</title>
     <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
+    <script type="module" src="main.js" defer></script>
     <script src="ads.js" defer></script>
-    <script type="module" src="firebase-config.js"></script>
 </head>
 <body>
     <header>
         <h1>⚖️ Official Government Voting</h1>
     </header>
 
-    <div class="vote-container">
+    <div class="container">
         <h2>Vote for the Next Supreme Leader</h2>
 
-        <div class="candidate-grid">
+        <div class="candidates">
             <div class="candidate">
                 <img src="images/shrek.png" alt="Shrek">
                 <p>🟢 Shrek (The People's Ogre)</p>
@@ -43,25 +42,31 @@
             </div>
         </div>
 
-        <p id="voteStatus">Waiting for your vote...</p>
-
         <div id="captchaSection">
-            <p>Type this code to verify:</p>
-            <p id="captchaCode" class="captcha-box"></p>
+            <h2>🔒 Security Check</h2>
+            <p id="captchaCode">Generating CAPTCHA...</p>
             <input type="text" id="captchaInput" placeholder="Enter code here">
             <button id="captchaVerify">Verify</button>
-            <p id="captchaStatus">Not Verified</p>
         </div>
         
-        <button id="results-btn" class="hidden" onclick="window.location.href='results.html'">
-            View Results
-        </button>
-        
-        
-        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-        <script src="firebase-config.js"></script>
 
+        <p id="voteStatus">Waiting for your vote...</p>
+
+        <button id="results-btn" class="hidden">View Results</button>
     </div>
+    <div id="voteCounterSection">
+        <h2>🗳️ Your Votes: <span id="userVotes">1</span></h2>
+    </div>
+    
+    <div id="buyVotesSection">
+        <h2>💰 Buy Extra Votes</h2>
+        <p>Each vote costs $5 (fake money).</p>
+        <p>Your Balance: $<span id="userBalance">100</span></p>
+        <input type="number" id="voteAmount" placeholder="Number of votes" min="1">
+        <button id="buyVotesButton">Buy Votes</button>
+    </div>
+    
+    <br>
+    <br>    
 </body>
 </html>

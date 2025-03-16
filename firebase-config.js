@@ -1,8 +1,8 @@
-// Import Firebase
+// ✅ Import Firebase Modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-// Your Firebase Config
+// ✅ Your Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyB1I0HCoRXnE1nGN18QEx5JJjXoLMrXUMU",
     authDomain: "learn1-cdf41.firebaseapp.com",
@@ -12,11 +12,8 @@ const firebaseConfig = {
     messagingSenderId: "719992648896",
     appId: "1:719992648896:web:3c2a20a2822fa6ff436925",
     measurementId: "G-7B0NJJY185"
-};
+  };
 
-// Initialize Firebase
+// ✅ Initialize Firebase App & Database
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-// Export database to use in other scripts
-export { database, ref };
+export const database = getDatabase(app);
