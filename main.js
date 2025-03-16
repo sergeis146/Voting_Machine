@@ -1,3 +1,6 @@
+import { database, ref } from "./firebase-config.js";
+import { getDatabase, set, update, increment, get, child } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll(".vote-button");
     const captchaCodeElement = document.getElementById("captchaCode");
@@ -9,9 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let captchaCode = generateCaptcha();
     let captchaVerified = false;
-    let buttonMoved = {}; // Track if a button has moved
 
-    // Generate a random CAPTCHA
+    // Firebase reference for votes
+    const votesRef = ref(database, "votes");
+
     function generateCaptcha() {
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         let code = "";
@@ -22,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return code;
     }
 
-    // CAPTCHA Verification
     captchaVerify.addEventListener("click", () => {
         if (captchaInput.value.toUpperCase() === captchaCode) {
             captchaVerified = true;
@@ -31,22 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             captchaStatus.innerText = "❌ Incorrect CAPTCHA. Try again.";
             captchaStatus.style.color = "red";
-            captchaCode = generateCaptcha(); // Regenerate CAPTCHA
-            captchaInput.value = ""; // Clear input field
+            captchaCode = generateCaptcha();
+            captchaInput.value = "";
         }
     });
 
-    // Move Vote Button Slightly (x=60, y=30), Only Once Per Button
     buttons.forEach(button => {
-        buttonMoved[button.dataset.option] = false;
-
-        button.addEventListener("mouseover", () => {
-            if (!buttonMoved[button.dataset.option]) {
-                button.style.transform = "translateX(60px) translateY(30px)";
-                buttonMoved[button.dataset.option] = true; // Prevent further movement
-            }
-        });
-
         button.addEventListener("click", () => {
             if (!captchaVerified) {
                 voteStatus.innerText = "❌ You must complete CAPTCHA before voting!";
@@ -55,14 +48,21 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             let vote = button.dataset.option;
-            let votes = JSON.parse(localStorage.getItem("votes")) || [];
-            votes.push(vote);
-            localStorage.setItem("votes", JSON.stringify(votes));
+
+            // Increment vote in Firebase
+            const voteRef = ref(database, `votes/${vote}`);
+            get(voteRef).then(snapshot => {
+                if (snapshot.exists()) {
+                    update(voteRef, { count: increment(1) });
+                } else {
+                    set(voteRef, { count: 1 });
+                }
+            });
 
             voteStatus.innerText = "✅ Vote successfully counted!";
             voteStatus.style.color = "green";
 
-            resultsButton.classList.remove("hidden"); // Show Results button
+            resultsButton.classList.remove("hidden");
             setTimeout(() => {
                 window.location.href = "results.html";
             }, 2000);

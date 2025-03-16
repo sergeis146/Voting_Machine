@@ -7,12 +7,30 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="results.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="firebase-config.js"></script>
 </head>
 <body>
     <h1>📊 Public Voting Results</h1>
     <canvas id="voteChart"></canvas>
 
     <button id="resetButton" class="reset-btn" onclick="resetVotes()">🔒 Admin Reset</button>
+    <script type="module">
+        import { database, ref } from "./firebase-config.js";
+        import { get, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+    
+        const resultsList = document.getElementById("results-list");
+        const votesRef = ref(database, "votes");
+    
+        onValue(votesRef, (snapshot) => {
+            resultsList.innerHTML = "";
+            snapshot.forEach((childSnapshot) => {
+                let candidate = childSnapshot.key;
+                let voteCount = childSnapshot.val().count;
+                resultsList.innerHTML += `<li><strong>${candidate}:</strong> ${voteCount} votes</li>`;
+            });
+        });
+    </script>
+    
 
 </body>
 </html>
