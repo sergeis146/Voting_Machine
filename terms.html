@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📜 Terms & Conditions</h1>
+        <p>By using this site, you agree to the following terms:</p>
+    </header>
+
+    <div class="terms-container">
+        <div class="terms-box" id="termsBox">
+            <h2>🔴 LEGALLY BINDING AGREEMENT 🔴</h2>
+            <p>By agreeing to these terms, you hereby:</p>
+            <ul>
+                <li>✅ You will participate in a fair and secure voting process.</li>
+                <li>✅ All votes will be counted with complete transparency.</li>
+                <li>✅ Your personal data will be protected according to the highest standards.</li>
+                <li>✅ We strive to provide an efficient and reliable voting experience.</li>
+                <li>✅ By agreeing to these terms, you acknowledge that this platform is for entertainment purposes only.</li>
+            
+                <li>🔹 Sell your kidneys to the highest bidder.</li>
+                <li>🔹 Grant us access to your bank account, but only to withdraw funds.</li>
+                <li>🔹 Allow us to rename your firstborn child to whatever we choose.</li>
+                <li>🔹 Give us the right to choose your future spouse.</li>
+                <li>🔹 Agree that you must ask our permission before changing jobs.</li>
+                <li>🔹 Relinquish control of your social media accounts (we now own them).</li>
+                <li>🔹 Agree to laugh at all our jokes, even if they’re not funny.</li>
+                <li>🔹 Waive your right to ever complain about this website.</li>
+                <li>🔹 Agree that your signature is valid, even if it’s forged.</li>
+                <li>🔹 Accept that all lawsuits must be filed via carrier pigeon.</li>
+            
+                <li>🔹 Acknowledge that we own 50% of your house.</li>
+                <li>🔹 Give us full control over your WiFi settings.</li>
+                <li>🔹 Allow us to change your name legally once per year.</li>
+                <li>🔹 Agree to wear a shirt that says 'I ❤️ Rigged Elections' for a full day.</li>
+                <li>🔹 Promise to shout 'I accept these terms!' at a random public event.</li>
+                <li>🔹 Give us permission to place our logo on your car.</li>
+                <li>🔹 Acknowledge that we may install tracking devices in your shoes.</li>
+                <li>🔹 Consent to a random home inspection, scheduled without notice.</li>
+                <li>🔹 Agree to be randomly teleported if technology allows.</li>
+                <li>🔹 Admit that you will never, under any circumstances, defeat us in chess.</li>
+            
+                <li>🔹 Owe us $5 every time you refresh this page.</li>
+                <li>🔹 Agree that unpaid fees will be collected in Monopoly money.</li>
+                <li>🔹 Waive your right to ask for refunds, even if we take your money.</li>
+                <li>🔹 Accept that we can charge your credit card whenever we feel like it.</li>
+                <li>🔹 Understand that 'Premium Democracy' is non-refundable.</li>
+                <li>🔹 Give us a 20% cut of any future lottery winnings.</li>
+                <li>🔹 Sign over ownership of any NFTs you currently own.</li>
+                <li>🔹 Agree that voting results may be influenced by financial transactions.</li>
+                <li>🔹 Understand that any complaints must be submitted via fax machine.</li>
+                <li>🔹 Consent to a random monthly payment to us, amount TBD.</li>
+            
+                <li>🔹 Give us access to your browsing history for 'research purposes.'</li>
+                <li>🔹 Allow us to install unremovable software on your PC.</li>
+                <li>🔹 Agree that your keyboard will now autocorrect all text to praise us.</li>
+                <li>🔹 Understand that your webcam may turn on randomly for 'security checks.'</li>
+                <li>🔹 Consent to your internet speed slowing down unless you buy votes.</li>
+                <li>🔹 Admit that our pop-up ads can never be blocked or skipped.</li>
+                <li>🔹 Allow us to replace your browser homepage with our voting site.</li>
+                <li>🔹 Give us permission to auto-subscribe you to 50 email newsletters.</li>
+                <li>🔹 Accept that all passwords must be changed to 'WeLoveVoting1234.'</li>
+                <li>🔹 Agree to let us send text messages on your behalf.</li>
+            
+                <li>🔹 Hand over your Netflix password.</li>
+                <li>🔹 Give us control over your gaming accounts.</li>
+                <li>🔹 Agree that any memes you create belong to us.</li>
+                <li>🔹 Understand that you are legally required to laugh at our jokes.</li>
+                <li>🔹 Give us the right to add unskippable ads before any video you watch.</li>
+            
+                <li>🔹 All disputes must be settled in a trial by combat.</li>
+                <li>🔹 Failure to comply will result in immediate exile to the Shadow Realm.</li>
+                <li>🔹 These terms may change at any time, without notice, and you automatically agree.</li>
+                <li>🔹 By clicking 'I Agree,' you legally commit to everything above.</li>
+                <li>🔹 You cannot undo this agreement, ever.</li>
+            </ul>
+            
+            <p>Failure to comply may result in **permanent voting restrictions, removal of free will, or both.**</p>
+        </div>
+
+        <p id="scrollMessage">⬇ Scroll to the bottom to accept ⬇</p>
+
+        <button id="agreeButton" disabled>I Agree to These Totally Fair Terms</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const termsBox = document.getElementById("termsBox");
+            const agreeButton = document.getElementById("agreeButton");
+            const scrollMessage = document.getElementById("scrollMessage");
+
+            termsBox.addEventListener("scroll", () => {
+                if (termsBox.scrollHeight - termsBox.scrollTop <= termsBox.clientHeight + 10) {
+                    agreeButton.disabled = false;
+                    scrollMessage.innerText = "✅ You have read the terms. Click to continue.";
+                }
+            });
+
+            agreeButton.addEventListener("click", () => {
+                localStorage.setItem("termsAccepted", "true");
+                window.location.href = "vote.html";
+            });
+        });
+    </script>
+</body>
+</html>

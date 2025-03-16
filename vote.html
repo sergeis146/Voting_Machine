@@ -9,6 +9,12 @@
     <script src="ads.js" defer></script>
 </head>
 <body>
+    <script>
+        if (!localStorage.getItem("termsAccepted")) {
+            window.location.href = "terms.html";
+        }
+    </script>
+    
     <header>
         <h1>⚖️ Official Government Voting</h1>
     </header>
