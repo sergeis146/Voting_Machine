@@ -1,43 +1,132 @@
-/* Basic styling */
+/* General Styling */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
     text-align: center;
-    background-color: #f4f4f4;
 }
 
-/* Voting container */
+/* Header */
+header {
+    background-color: #003366;
+    color: white;
+    padding: 15px;
+}
+
+/* Voting Container */
 .vote-container {
-    margin-top: 50px;
-    position: relative;
+    max-width: 700px;
+    background: white;
+    padding: 20px;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Vote buttons */
-.vote-button {
-    font-size: 20px;
-    padding: 10px 20px;
-    margin: 10px;
+/* Candidate Grid (Fixing Uneven Layout) */
+.candidate-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns, even size */
+    gap: 20px;
+    justify-items: center;
+    margin-bottom: 20px;
+}
+
+/* Candidate Card (Fixing Spacing & Layout) */
+.candidate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Candidate Image (Fixed Width & Auto Height) */
+.candidate img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Candidate Text & Buttons */
+.candidate p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.vote-button, .info-button {
+    margin-top: 5px;
+    padding: 8px 12px;
     cursor: pointer;
+    border-radius: 5px;
     border: 2px solid black;
-    background-color: white;
-    transition: transform 0.2s, background-color 0.3s;
+    transition: 0.3s;
 }
 
-/* Useless loading bar (hidden by default) */
-.democracy-bar {
-    width: 50%;
-    height: 20px;
-    margin: 20px auto;
-    border: 2px solid black;
-    background-color: lightgray;
-    overflow: hidden;
-    position: relative;
-    display: none; /* Hidden initially */
+/* Smaller Info Button */
+.info-button {
+    font-size: 12px;
+    width: 30px;
 }
 
-/* Actual progress indicator */
-.bar-progress {
-    width: 0%;
-    height: 100%;
-    background-color: blue;
-    transition: width 3s ease-in-out;
+/* Results Button */
+.results-btn {
+    background: #28a745;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* CAPTCHA Section */
+#captchaSection {
+    background: #dcdcdc;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* CAPTCHA Alert (Now Always Visible If Needed) */
+#captchaAlert {
+    color: red;
+    font-weight: bold;
+    display: none;
+    margin-top: 10px;
+}
+
+/* CAPTCHA Button */
+#captchaButton {
+    font-size: 18px;
+    padding: 8px 15px;
+    border: 2px solid #003366;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#captchaButton:hover {
+    background: #bbb;
+    color: white;
+}
+
+/* Disabled Vote Button (If Already Voted) */
+.vote-button:disabled {
+    background: gray;
+    color: white;
+    cursor: not-allowed;
+    border: 2px solid #666;
+}
+
+
+/* Premium Democracy */
+#premiumDemocracy {
+    background: gold;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
 }
