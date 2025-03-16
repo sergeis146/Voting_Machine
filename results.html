@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results</title>
     <link rel="stylesheet" href="style.css">
-    <script type="module" src="results.js" defer></script>
 </head>
 <body>
     <header>
@@ -14,12 +13,17 @@
 
     <div class="container">
         <h2>Current Vote Counts</h2>
-        <ul id="results-list">
-            <li>Loading results...</li>
-        </ul>
+
+        <!-- ✅ This is what results.js updates -->
+        <div id="resultsContainer">
+            <p>Loading results...</p>
+        </div>
 
         <button id="reset-btn">🔒 Admin Reset</button>
         <button onclick="window.location.href='vote.html'">⬅ Back to Voting</button>
     </div>
+
+    <!-- ✅ Move script to the bottom so it loads after the page -->
+    <script src="results.js"></script>
 </body>
 </html>

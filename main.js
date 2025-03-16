@@ -1,3 +1,5 @@
+console.log("✅ Script is running!");
+
 document.addEventListener("DOMContentLoaded", () => {
     const voteButtons = document.querySelectorAll(".vote-button");
     const captchaCodeElement = document.getElementById("captchaCode");
@@ -62,38 +64,34 @@ document.addEventListener("DOMContentLoaded", () => {
         userVotesDisplay.innerText = userVotes;
         alert("✅ Vote purchased successfully!");
     });
-
-    // ✅ Voting Function
     voteButtons.forEach(button => {
         button.addEventListener("click", () => {
             if (!captchaVerified) {
                 alert("❌ Complete CAPTCHA first!");
                 return;
             }
-
+    
             if (userVotes < 1) {
                 alert("❌ You have no votes left! Buy more.");
                 return;
             }
-
+    
             let vote = button.dataset.option;
             let votes = JSON.parse(localStorage.getItem("votes")) || {};
-
-            votes[vote] = (votes[vote] || 0) + 1;
+    
+            if (!votes[vote]) votes[vote] = 0; // ✅ Ensure candidate exists
+            votes[vote] += 1;
+    
             userVotes -= 1;
             voteCount += 1;
-
+    
             localStorage.setItem("votes", JSON.stringify(votes));
             localStorage.setItem("userVotes", userVotes);
             localStorage.setItem("voteCount", voteCount);
             userVotesDisplay.innerText = userVotes;
-
+    
             alert(`✅ You cast a vote for ${vote}!`);
-            generateCaptcha(); // ✅ New CAPTCHA after each vote
+            generateCaptcha();
         });
-    });
-
-    resultsButton.addEventListener("click", () => {
-        window.location.href = "results.html";
     });
 });

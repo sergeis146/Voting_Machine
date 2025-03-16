@@ -1,31 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const resultsList = document.getElementById("results-list");
-    const resetBtn = document.getElementById("reset-btn");
+    console.log("✅ results.js is running!");
 
-    let votes = JSON.parse(localStorage.getItem("votes")) || {
-        "Shrek": 0,
-        "Big Chungus": 0,
-        "Giga Chad": 0,
-        "Mr. Krabs": 0
-    };
+    const resultsContainer = document.getElementById("resultsContainer");
 
-    resultsList.innerHTML = `
-        <li><strong>Shrek:</strong> ${votes["Shrek"]} votes</li>
-        <li><strong>Big Chungus:</strong> ${votes["Big Chungus"]} votes</li>
-        <li><strong>Giga Chad:</strong> ${votes["Giga Chad"]} votes</li>
-        <li><strong>Mr. Krabs:</strong> ${votes["Mr. Krabs"]} votes</li>
-    `;
+    if (!resultsContainer) {
+        console.error("❌ Error: 'resultsContainer' not found in results.html!");
+        return;
+    }
 
-    // ✅ Reset Votes Button
-    resetBtn.addEventListener("click", () => {
-        let password = prompt("Enter admin password:");
-        if (password === "password1234") {
-            localStorage.removeItem("votes");
-            localStorage.removeItem("hasVoted");
-            alert("✅ All votes have been reset.");
-            location.reload();
-        } else {
-            alert("❌ Incorrect password.");
-        }
+    let votes = JSON.parse(localStorage.getItem("votes")) || {};
+
+    // ✅ Add random votes (10-30) to each candidate, even if they already have votes
+    let candidates = ["Shrek", "Big Chungus", "Giga Chad", "Mr. Krabs"];
+
+    candidates.forEach(candidate => {
+        if (!votes[candidate]) votes[candidate] = 0; // If missing, start at 0
+        votes[candidate] += getRandomVotes(); // Always add random votes
     });
+
+    // ✅ Store updated results back in localStorage
+    localStorage.setItem("votes", JSON.stringify(votes));
+
+    console.log("Updated Votes:", votes);
+
+    let resultsHTML = "<h2>🗳️ Voting Results</h2><ul>";
+
+    Object.entries(votes).forEach(([candidate, count]) => {
+        resultsHTML += `<li><strong>${candidate}:</strong> ${count} votes</li>`;
+    });
+
+    resultsHTML += "</ul>";
+    resultsContainer.innerHTML = resultsHTML;
 });
+
+// ✅ Function to generate random vote numbers (10-30)
+function getRandomVotes() {
+    return Math.floor(Math.random() * (30 - 10 + 1)) + 10;
+}
