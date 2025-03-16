@@ -3,25 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Public Voting Results</title>
+    <title>Voting Results</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="results.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>📊 Official Voting Results</h1>
-        <p>Transparency in Action™</p>
-    </header>
+    <h1>📊 Public Voting Results</h1>
+    <canvas id="voteChart"></canvas>
 
-    <div class="results-container">
-        <h2>All Votes Counted</h2>
-        <canvas id="voteChart"></canvas>
+    <button id="resetButton" class="reset-btn" onclick="resetVotes()">🔒 Admin Reset</button>
 
-        <button class="results-btn" onclick="window.location.href='vote.html'">⬅ Back to Voting</button>
-
-        <!-- Admin Reset Button -->
-        <button class="admin-reset" onclick="resetVotes()">🛑 Admin Reset</button>
-    </div>
 </body>
 </html>

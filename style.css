@@ -1,132 +1,242 @@
-/* General Styling */
+/* 📌 GLOBAL PAGE STYLING */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    font-family: "Arial", sans-serif;
+    background-color: #f8f8f8;
     text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
-/* Header */
+/* 📌 HEADER (FAKE OFFICIAL GOVERNMENT STYLE) */
 header {
-    background-color: #003366;
+    background: linear-gradient(to right, #002855, #004080);
     color: white;
-    padding: 15px;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px black;
+    border-bottom: 4px solid #ffcc00;
 }
 
-/* Voting Container */
+/* 📌 VOTING CONTAINER */
 .vote-container {
     max-width: 700px;
     background: white;
     padding: 20px;
     margin: 30px auto;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    border: 3px solid #ff0000;
+    font-size: 18px;
 }
 
-/* Candidate Grid (Fixing Uneven Layout) */
+/* 📌 CANDIDATE GRID */
 .candidate-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns, even size */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     gap: 20px;
-    justify-items: center;
     margin-bottom: 20px;
 }
 
-/* Candidate Card (Fixing Spacing & Layout) */
+/* 📌 CANDIDATE CARD */
 .candidate {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
-    background: #ffffff;
+    width: 45%;
+    background: #ffffcc;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 3px dashed #ff0000;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Candidate Image (Fixed Width & Auto Height) */
+/* 📌 CANDIDATE IMAGE */
 .candidate img {
     width: 200px;
     height: auto;
     border-radius: 8px;
+    border: 3px solid black;
 }
 
-/* Candidate Text & Buttons */
+/* 📌 CANDIDATE TEXT */
 .candidate p {
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
-}
-
-.vote-button, .info-button {
-    margin-top: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 2px solid black;
-    transition: 0.3s;
-}
-
-/* Smaller Info Button */
-.info-button {
-    font-size: 12px;
-    width: 30px;
-}
-
-/* Results Button */
-.results-btn {
-    background: #28a745;
-    color: white;
+    color: #ff0000;
+    text-shadow: 1px 1px 2px black;
+}/* 📌 VOTE BUTTON (MOVES EXACTLY x=60px, y=30px ONCE) */
+.vote-button {
     font-size: 18px;
     font-weight: bold;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-/* CAPTCHA Section */
-#captchaSection {
-    background: #dcdcdc;
-    padding: 15px;
+    background: #cc0000;
+    color: white;
+    padding: 12px 24px;
     border-radius: 8px;
-    margin-top: 20px;
+    border: 2px solid black;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease-in-out, background 0.2s;
+    text-shadow: 1px 1px 2px black;
 }
 
-/* CAPTCHA Alert (Now Always Visible If Needed) */
-#captchaAlert {
+.vote-button:hover {
+    background: #ff0000;
+}
+
+.vote-button.moved {
+    transform: translateX(60px) translateY(30px);
+}
+
+/* 📌 RESULTS BUTTON (CENTERED & MATCHES ADMIN RESET) */
+#results-btn {
+    background: linear-gradient(to right, #004400, #008800);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 14px 30px;
+    border: 3px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 30px auto 10px;
+    text-shadow: 1px 1px 3px black;
+    display: block;
+    width: 250px;
+    max-width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+#results-btn:hover {
+    background: #ff0000;
+    text-shadow: 2px 2px 4px black;
+    transform: scale(1.05);
+}
+
+/* 📌 RESULTS BUTTON (CENTERED & MATCHES ADMIN RESET) */
+#results-btn {
+    background: linear-gradient(to right, #004400, #008800);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 14px 30px;
+    border: 3px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 30px auto 10px;
+    text-shadow: 1px 1px 3px black;
+    display: block;
+    width: 250px;
+    max-width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+#results-btn:hover {
+    background: #ff0000;
+    text-shadow: 2px 2px 4px black;
+    transform: scale(1.05);
+}
+
+
+/* 📌 CAPTCHA SECTION (GOVERNMENT SECURITY LOOK) */
+#captchaSection {
+    background: #ffcc00;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 4px solid black;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+}
+
+/* 📌 CAPTCHA INPUT */
+#captchaInput {
+    font-size: 22px;
+    padding: 10px;
+    border: 3px solid black;
+    text-align: center;
+    width: 220px;
+    display: block;
+    margin: 10px auto;
+    background: white;
+    color: red;
+    text-transform: uppercase;
+}
+
+/* 📌 CAPTCHA ALERT */
+#captchaStatus {
     color: red;
     font-weight: bold;
-    display: none;
-    margin-top: 10px;
-}
-
-/* CAPTCHA Button */
-#captchaButton {
     font-size: 18px;
-    padding: 8px 15px;
-    border: 2px solid #003366;
-    background: white;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
-#captchaButton:hover {
-    background: #bbb;
+/* 📌 ADMIN RESET BUTTON (LOOKS IMPORTANT) */
+.reset-btn {
+    background: linear-gradient(to right, #550000, #aa0000);
     color: white;
-}
-
-/* Disabled Vote Button (If Already Voted) */
-.vote-button:disabled {
-    background: gray;
-    color: white;
-    cursor: not-allowed;
-    border: 2px solid #666;
-}
-
-
-/* Premium Democracy */
-#premiumDemocracy {
-    background: gold;
-    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: 3px solid black;
     border-radius: 8px;
+    cursor: pointer;
     margin-top: 20px;
+    text-shadow: 1px 1px 2px black;
+    transition: all 0.3s ease-in-out;
+}
+
+.reset-btn:hover {
+    background: #ff0000;
+    text-shadow: 2px 2px 4px black;
+    transform: scale(1.05);
+}
+/* 📌 AD POPUP (Now Works Properly) */
+.adPopup {
+    position: fixed;
+    width: 300px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    text-align: center;
+    border: 3px solid red;
+    position: absolute;
+    animation: shake 0.2s infinite;
+}
+
+/* 📌 AD IMAGE */
+.adPopup .adImage {
+    width: 280px;
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 📌 CLOSE BUTTON (Now Fully Functional) */
+.adPopup .closeAd {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.adPopup .closeAd:hover {
+    background: darkred;
+}
+
+/* 📌 FAKE WARNING SHAKE */
+@keyframes shake {
+    0% { transform: translateX(2px) rotate(1deg); }
+    50% { transform: translateX(-2px) rotate(-1deg); }
+    100% { transform: translateX(2px) rotate(1deg); }
 }
